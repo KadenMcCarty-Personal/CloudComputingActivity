@@ -10,7 +10,7 @@ public class ProductsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProductsApplication.class, args);
-		// hello?
+		// hello? OK! it seemed to have worked! I'm going to commit the same file from my other git account now with this comment changed!
 	}
 
 }
