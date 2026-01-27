@@ -25,14 +25,18 @@ public class UserEntity {
     @Column(name = "ROLE", nullable = false)
     private String role;
 
+    @Column(name = "ENABLED", nullable = false)
+    private boolean enabled;
+
     public UserEntity() {
     }
 
-    public UserEntity(Long id, String username, String password, String role) {
+    public UserEntity(Long id, String username, String password, String role, boolean enabled) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -65,5 +69,13 @@ public class UserEntity {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
