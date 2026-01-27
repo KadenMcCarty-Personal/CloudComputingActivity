@@ -1,28 +1,37 @@
 package com.kaden.products.data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import com.kaden.products.models.OrderModel;
 
-@Table("ORDERS")
-public class OrderEntity 
+@Entity
+@Table(name = "ORDERS")
+public class OrderEntity
 {
     @Id
-    @Column("ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private int id;
 
-    @Column("ORDER_NUMBER")
+    @Column(name = "ORDER_NUMBER")
     private String order_number;
 
-    @Column("PRODUCT_NAME")
+    @Column(name = "PRODUCT_NAME")
     private String product_name;
 
-    @Column("PRICE")
+    @Column(name = "PRICE")
     private double price;
 
-    @Column("QTY")
+    @Column(name = "QTY")
     private int quantity;
+
+    public OrderEntity() {
+    }
 
     public OrderEntity(int id, String order_number, String product_name, double price, int quantity) {
         this.id = id;
