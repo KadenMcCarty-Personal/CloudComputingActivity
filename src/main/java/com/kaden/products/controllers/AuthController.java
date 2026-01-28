@@ -37,7 +37,7 @@ public class AuthController {
         UserEntity user = new UserEntity();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole("ROLE_USER");
+        user.setRole("USER");
         user.setEnabled(true);
         usersRepository.save(user);
         return "redirect:/login?registered";
