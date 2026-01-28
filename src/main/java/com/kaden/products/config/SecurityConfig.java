@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.kaden.products.services.CustomUserDetailsService;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
@@ -29,6 +29,9 @@ public class SecurityConfig {
                 .requestMatchers("/login", "/register", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
+            )
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/register")
             )
             .formLogin(form -> form
                 .loginPage("/login")
