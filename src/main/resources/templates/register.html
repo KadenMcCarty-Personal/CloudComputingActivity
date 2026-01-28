@@ -23,54 +23,17 @@
                         <span th:text="${error}">Please correct the errors below</span>
                     </div>
 
-                    <!-- Success Message -->
-                    <div th:if="${success}" class="alert alert-success" role="alert">
-                        <span th:text="${success}">Account created successfully</span>
-                    </div>
-
                     <!-- Registration Form -->
-                    <form th:action="@{/register}" th:object="${user}" method="post">
+                    <form th:action="@{/register}" method="post">
 
                         <div class="mb-3">
                             <label for="username" class="form-label fw-bold">Username *</label>
-                            <input type="text" id="username" th:field="*{username}" class="form-control"
-                                   th:classappend="${usernameError} ? 'is-invalid'" placeholder="johndoe" required>
-                            <div th:if="${usernameError}" class="text-danger small mt-1">
-                                <span th:text="${usernameError}">Username already exists</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label fw-bold">Email *</label>
-                            <input type="email" id="email" th:field="*{email}" class="form-control"
-                                   th:classappend="${emailError} ? 'is-invalid'" placeholder="your.email@example.com" required>
-                            <div th:if="${emailError}" class="text-danger small mt-1">
-                                <span th:text="${emailError}">Invalid email</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="fullName" class="form-label fw-bold">Full Name</label>
-                            <input type="text" id="fullName" th:field="*{fullName}" class="form-control" placeholder="John Doe">
+                            <input type="text" id="username" name="username" class="form-control" placeholder="johndoe" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label fw-bold">Password *</label>
-                            <input type="password" id="password" th:field="*{password}" class="form-control"
-                                   th:classappend="${passwordError} ? 'is-invalid'" required>
-                            <small class="text-muted">Must be at least 8 characters</small>
-                            <div th:if="${passwordError}" class="text-danger small mt-1">
-                                <span th:text="${passwordError}">Password error</span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label fw-bold">Confirm Password *</label>
-                            <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="form-control"
-                                   th:classappend="${confirmPasswordError} ? 'is-invalid'" required>
-                            <div th:if="${confirmPasswordError}" class="text-danger small mt-1">
-                                <span th:text="${confirmPasswordError}">Passwords do not match</span>
-                            </div>
+                            <input type="password" id="password" name="password" class="form-control" required>
                         </div>
 
                         <div class="d-flex gap-2">
