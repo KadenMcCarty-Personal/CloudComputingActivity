@@ -39,18 +39,17 @@
                                 <td th:text="${user.username}">mjohnson</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold">Email:</td>
-                                <td th:text="${user.email}">mary.j@example.com</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold">Full Name:</td>
-                                <td th:text="${user.fullName}">Mary Johnson</td>
-                            </tr>
-                            <tr>
                                 <td class="fw-bold">Role:</td>
                                 <td>
                                     <span th:if="${user.role == 'ADMIN'}" class="badge bg-success">ADMIN</span>
                                     <span th:if="${user.role != 'ADMIN'}" class="badge bg-warning text-dark">USER</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Enabled:</td>
+                                <td>
+                                    <span th:if="${user.enabled}" class="badge bg-success">Active</span>
+                                    <span th:unless="${user.enabled}" class="badge bg-secondary">Disabled</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -60,7 +59,8 @@
 
                 <!-- Buttons -->
                 <div class="card-footer d-flex gap-2 py-3">
-                    <form th:action="@{/admin/users/delete/{id}(id=${user.id})}" method="post" class="flex-fill">
+                    <form th:action="@{/admin/users/delete}" method="post" class="flex-fill">
+                        <input type="hidden" name="id" th:value="${user.id}">
                         <button type="submit" class="btn btn-danger btn-lg w-100">Confirm Delete</button>
                     </form>
                     <a th:href="@{/admin/users}" class="btn btn-secondary btn-lg flex-fill text-center">Cancel</a>

@@ -34,7 +34,7 @@ public class UserAdminController {
             .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
         model.addAttribute("title", "Edit User");
-        return "userEdit";
+        return "editUser";
     }
 
     @PostMapping("/edit")
@@ -53,7 +53,7 @@ public class UserAdminController {
             .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
         model.addAttribute("title", "Delete User");
-        return "userDelete";
+        return "confirmDeleteUser";
     }
 
     @PostMapping("/delete")

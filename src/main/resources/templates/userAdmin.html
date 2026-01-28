@@ -38,9 +38,8 @@
             <tr>
                 <th>ID</th>
                 <th>Username</th>
-                <th>Email</th>
-                <th>Full Name</th>
                 <th>Role</th>
+                <th>Enabled</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -48,11 +47,13 @@
             <tr th:each="user : ${users}">
                 <td th:text="${user.id}">1</td>
                 <td th:text="${user.username}">admin</td>
-                <td th:text="${user.email}">admin@example.com</td>
-                <td th:text="${user.fullName}">Jane Doe</td>
                 <td>
                     <span th:if="${user.role == 'ADMIN'}" class="badge bg-success">ADMIN</span>
                     <span th:if="${user.role != 'ADMIN'}" class="badge bg-warning text-dark">USER</span>
+                </td>
+                <td>
+                    <span th:if="${user.enabled}" class="badge bg-success">Active</span>
+                    <span th:unless="${user.enabled}" class="badge bg-secondary">Disabled</span>
                 </td>
                 <td>
                     <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="btn btn-sm btn-info">Edit</a>
