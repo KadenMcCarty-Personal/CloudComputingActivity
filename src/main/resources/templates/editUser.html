@@ -13,91 +13,36 @@
         <h2 th:text="'Edit User - ID: ' + ${user.id}">Edit User - ID: 2</h2>
     </div>
 
-    <!-- Warning Message -->
-    <div th:if="${warning}" class="alert alert-warning" role="alert">
-        <span th:text="${warning}">Cannot change your own admin status</span>
-    </div>
-
-    <!-- Error Message -->
-    <div th:if="${error}" class="alert alert-danger" role="alert">
-        <span th:text="${error}">An error occurred</span>
-    </div>
-
-    <!-- Success Message -->
-    <div th:if="${success}" class="alert alert-success" role="alert">
-        <span th:text="${success}">User updated successfully</span>
-    </div>
-
     <!-- Edit User Form -->
-    <form th:action="@{/admin/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <form th:action="@{/admin/users/edit}" method="post">
+        <input type="hidden" name="id" th:value="${user.id}">
 
         <div class="card p-4 mb-4">
 
-            <!-- Row 1: User ID and Full Name -->
+            <!-- Username (read-only) -->
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="userId" class="form-label fw-bold">User ID</label>
-                    <input type="text" id="userId" class="form-control bg-secondary-subtle"
-                           th:value="${user.id} + ' (read-only)'" readonly>
-                </div>
-                <div class="col-md-6">
-                    <label for="fullName" class="form-label fw-bold">Full Name</label>
-                    <input type="text" id="fullName" th:field="*{fullName}" class="form-control" placeholder="John Smith">
+                    <label for="username" class="form-label fw-bold">Username</label>
+                    <input type="text" id="username" class="form-control bg-secondary-subtle"
+                           th:value="${user.username}" readonly>
                 </div>
             </div>
 
-            <!-- Row 2: Username, Role, Status -->
+            <!-- Role and Enabled -->
             <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="username" class="form-label fw-bold">Username *</label>
-                    <input type="text" id="username" th:field="*{username}" class="form-control"
-                           th:classappend="${usernameError} ? 'is-invalid'" required>
-                    <div th:if="${usernameError}" class="text-danger small mt-1">
-                        <span th:text="${usernameError}">Username error</span>
-                    </div>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="role" class="form-label fw-bold">Role *</label>
-                    <select id="role" th:field="*{role}" class="form-select" required>
-                        <option value="USER">USER</option>
-                        <option value="ADMIN">ADMIN</option>
+                    <select id="role" name="role" class="form-select" required>
+                        <option value="USER" th:selected="${user.role == 'USER'}">USER</option>
+                        <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">ADMIN</option>
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <label for="status" class="form-label fw-bold">Status *</label>
-                    <select id="status" th:field="*{status}" class="form-select" required>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                <div class="col-md-4">
+                    <label for="enabled" class="form-label fw-bold">Enabled *</label>
+                    <select id="enabled" name="enabled" class="form-select" required>
+                        <option value="true" th:selected="${user.enabled}">Active</option>
+                        <option value="false" th:selected="${!user.enabled}">Disabled</option>
                     </select>
-                </div>
-            </div>
-
-            <!-- Row 3: Email -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="email" class="form-label fw-bold">Email *</label>
-                    <input type="email" id="email" th:field="*{email}" class="form-control"
-                           th:classappend="${emailError} ? 'is-invalid'" placeholder="john.smith@example.com" required>
-                    <div th:if="${emailError}" class="text-danger small mt-1">
-                        <span th:text="${emailError}">Email error</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Change Password Section -->
-            <h5 class="fw-bold mt-4 mb-3">Change Password (Optional)</h5>
-
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="newPassword" class="form-label fw-bold">New Password</label>
-                    <input type="password" id="newPassword" name="newPassword" class="form-control">
-                </div>
-                <div class="col-md-6">
-                    <label for="confirmNewPassword" class="form-label fw-bold">Confirm New Password</label>
-                    <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="form-control">
-                    <div th:if="${passwordError}" class="text-danger small mt-1">
-                        <span th:text="${passwordError}">Passwords do not match</span>
-                    </div>
                 </div>
             </div>
 
